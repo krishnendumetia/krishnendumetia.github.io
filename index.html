@@ -2,53 +2,1150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Krishnendu | Hardware Design</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0d1117;
-            color: #e6edf3;
-            max-width: 850px;
-            margin: 70px auto;
-            padding: 24px;
-            line-height: 1.7;
-        }
-        h1 { color: #58a6ff; }
-        a { color: #58a6ff; }
-        .project {
-            border: 1px solid #30363d;
-            padding: 18px;
-            margin: 16px 0;
-            border-radius: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090d14">
+  <meta name="description" content="Krishnendu Metia — Electronics master's student and aspiring RTL Design and Verification Engineer. Explore my Verilog, SystemVerilog, FPGA and ASIC projects.">
+  <title>Krishnendu Metia | RTL Design & Verification</title>
+
+  <style>
+    /* ---------- Base ---------- */
+    :root {
+      --bg: #090d14;
+      --panel: #101722;
+      --panel-hover: #151f2d;
+      --border: #253247;
+      --text: #edf3fc;
+      --muted: #98a8bd;
+      --blue: #70a7ff;
+      --cyan: #70e1d0;
+      --purple: #b6a0ff;
+      --max-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      background:
+        radial-gradient(ellipse at 80% 0%, #13213a 0%, transparent 36%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+                   "Segoe UI", sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(var(--max-width), 90%);
+      margin: 0 auto;
+    }
+
+    .section {
+      padding: 95px 0;
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 4vw, 2.7rem);
+      line-height: 1.2;
+      letter-spacing: -1.2px;
+      margin: 12px 0 16px;
+    }
+
+    .section-description {
+      max-width: 650px;
+      color: var(--muted);
+      margin-bottom: 35px;
+    }
+
+    .accent {
+      color: var(--blue);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    /* ---------- Navigation ---------- */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(9, 13, 20, 0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(100, 130, 170, 0.18);
+    }
+
+    .nav-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 1rem;
+      font-weight: 750;
+      letter-spacing: -0.5px;
+    }
+
+    .brand span {
+      color: var(--cyan);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .nav-button {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 7px 12px;
+      color: var(--text) !important;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 7px 11px;
+      border-radius: 7px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      min-height: 570px;
+      display: flex;
+      align-items: center;
+      padding: 95px 0 85px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 0.8fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 12px;
+      border: 1px solid #244a43;
+      background: #10251f;
+      color: #9ce8cd;
+      border-radius: 30px;
+      font-size: 0.78rem;
+      margin-bottom: 25px;
+    }
+
+    .availability-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #70e1b0;
+      box-shadow: 0 0 10px #70e1b080;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.6rem);
+      line-height: 1.07;
+      letter-spacing: -3px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: var(--blue);
+    }
+
+    .hero-subtitle {
+      color: #c4d0e0;
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      margin-bottom: 18px;
+    }
+
+    .hero-description {
+      max-width: 600px;
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 17px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 650;
+      transition: 0.2s ease;
+    }
+
+    .button-primary {
+      background: var(--blue);
+      color: #08111e;
+      border-color: var(--blue);
+    }
+
+    .button-primary:hover {
+      background: #9cc4ff;
+      transform: translateY(-2px);
+    }
+
+    .button-secondary:hover {
+      background: var(--panel-hover);
+      border-color: #58749a;
+    }
+
+    .terminal {
+      border: 1px solid #2c3d54;
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(13, 20, 31, 0.9);
+      box-shadow: 0 25px 80px #00000035;
+      transform: rotate(1deg);
+    }
+
+    .terminal-header {
+      padding: 13px 16px;
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.76rem;
+    }
+
+    .terminal-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #506078;
+    }
+
+    .terminal-body {
+      padding: 25px 22px;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 0.8rem;
+      line-height: 2.1;
+      overflow-wrap: anywhere;
+    }
+
+    .code-comment { color: #7e91a9; }
+    .code-key { color: var(--purple); }
+    .code-value { color: var(--cyan); }
+    .code-fn { color: #e9c58c; }
+
+    .terminal-status {
+      margin-top: 15px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      color: #9ce8cd;
+    }
+
+    /* ---------- Quick facts ---------- */
+    .facts {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: #0d131d;
+    }
+
+    .facts-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .fact {
+      padding: 25px 15px;
+      text-align: center;
+    }
+
+    .fact + .fact {
+      border-left: 1px solid var(--border);
+    }
+
+    .fact strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .fact span {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    /* ---------- Projects ---------- */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: linear-gradient(145deg, #121b29, #0d131d);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: #4b6b91;
+    }
+
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .project-icon {
+      display: grid;
+      place-items: center;
+      width: 45px;
+      height: 45px;
+      border: 1px solid #30445f;
+      background: #18263a;
+      border-radius: 10px;
+      font-size: 1.2rem;
+    }
+
+    .project-type {
+      color: var(--cyan);
+      font-family: Consolas, monospace;
+      font-size: 0.72rem;
+    }
+
+    .project-card h3 {
+      font-size: 1.18rem;
+      margin-bottom: 9px;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: auto;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      background: #182334;
+      color: #c1d1e7;
+      border: 1px solid #293b53;
+      border-radius: 5px;
+      padding: 4px 8px;
+      font-size: 0.72rem;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--blue);
+      font-size: 0.86rem;
+      font-weight: 650;
+      align-self: flex-start;
+    }
+
+    .project-link:hover {
+      color: var(--cyan);
+    }
+
+    /* ---------- Skills ---------- */
+    .skills-section {
+      background: #0c121b;
+      border-top: 1px solid #192435;
+      border-bottom: 1px solid #192435;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .skill-card {
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel);
+    }
+
+    .skill-card h3 {
+      font-size: 0.98rem;
+      margin-bottom: 13px;
+    }
+
+    .skill-card p {
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    /* ---------- Experience ---------- */
+    .timeline {
+      border-left: 1px solid #3b5474;
+      margin-left: 8px;
+      padding-left: 27px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 35px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -33px;
+      top: 8px;
+      width: 11px;
+      height: 11px;
+      background: var(--cyan);
+      border: 3px solid var(--bg);
+      border-radius: 50%;
+    }
+
+    .timeline-date {
+      color: var(--cyan);
+      font-family: Consolas, monospace;
+      font-size: 0.78rem;
+    }
+
+    .timeline-item h3 {
+      font-size: 1.1rem;
+      margin: 6px 0;
+    }
+
+    .timeline-item p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      max-width: 750px;
+    }
+
+    /* ---------- Technical notes ---------- */
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .note-card {
+      display: block;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel);
+      transition: border-color 0.2s;
+    }
+
+    .note-card:hover {
+      border-color: var(--blue);
+    }
+
+    .note-card span {
+      color: var(--cyan);
+      font-size: 0.75rem;
+      font-family: Consolas, monospace;
+    }
+
+    .note-card h3 {
+      margin: 9px 0;
+      font-size: 1rem;
+    }
+
+    .note-card p {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    /* ---------- Contact ---------- */
+    .contact-box {
+      text-align: center;
+      padding: 55px 30px;
+      border: 1px solid #30435c;
+      border-radius: 16px;
+      background:
+        radial-gradient(ellipse at 50% 0%, #203654 0%, transparent 65%),
+        var(--panel);
+    }
+
+    .contact-box .section-description {
+      margin: 0 auto 25px;
+    }
+
+    .contact-box .button-row {
+      justify-content: center;
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 25px 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .back-top {
+      color: var(--blue);
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 800px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .terminal {
+        max-width: 520px;
+        width: 100%;
+        transform: none;
+      }
+
+      .skills-grid,
+      .notes-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .nav-links {
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .section {
+        padding: 68px 0;
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 75px 0 65px;
+      }
+
+      .hero h1 {
+        letter-spacing: -2px;
+      }
+
+      .nav-inner {
+        min-height: 62px;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 62px;
+        left: 0;
+        right: 0;
+        padding: 20px 5%;
+        background: #0c121b;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .projects-grid,
+      .skills-grid,
+      .notes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .facts-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .fact + .fact {
+        border-left: 0;
+        border-top: 1px solid var(--border);
+      }
+
+      .project-card {
+        padding: 21px;
+      }
+
+      .contact-box {
+        padding: 38px 20px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Hi, I'm Krishnendu 👋</h1>
-    <p>Master's student in Electronics at NIT Warangal.</p>
-    <p>Aspiring RTL Design and Verification Engineer.</p>
 
-    <h2>Projects</h2>
+  <!-- NAVIGATION -->
+  <header class="navbar" id="top">
+    <div class="container nav-inner">
+      <a class="brand" href="#top">KM<span>.</span></a>
 
-    <div class="project">
-        <h3>RV32I RISC-V Processor</h3>
-        <p>Designed a single-cycle 32-bit RISC-V processor using Verilog,
-        with a datapath, control unit, ALU and register file.</p>
+      <button class="menu-toggle" id="menuToggle"
+              aria-label="Toggle navigation"
+              aria-expanded="false"
+              aria-controls="navLinks">
+        ☰
+      </button>
+
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#notes">Notes</a>
+        <a class="nav-button" href="#contact">Contact ↗</a>
+      </nav>
     </div>
+  </header>
 
-    <div class="project">
-        <h3>Asynchronous FIFO</h3>
-        <p>Parameterized FIFO design using Gray-coded pointers,
-        clock-domain crossing synchronizers and SystemVerilog verification.</p>
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="about">
+      <div class="container hero-grid">
+        <div>
+          <div class="availability">
+            <span class="availability-dot"></span>
+            Electronics · RTL · FPGA
+          </div>
+
+          <p class="eyebrow">Hello, world! I'm</p>
+
+          <h1>Krishnendu<br><span>Metia.</span></h1>
+
+          <p class="hero-subtitle">
+            Electronics Master's Student
+            <span class="muted">/</span>
+            Aspiring RTL Design Engineer
+          </p>
+
+          <p class="hero-description">
+            I enjoy turning digital design concepts into working hardware.
+            My interests include RTL design, SystemVerilog verification,
+            processor microarchitecture, FPGA prototyping and ASIC design.
+          </p>
+
+          <div class="button-row">
+            <a class="button button-primary" href="#projects">
+              Explore my projects ↘
+            </a>
+            <a class="button button-secondary"
+               href="https://github.com/krishnendumetia"
+               target="_blank" rel="noopener noreferrer">
+              GitHub ↗
+            </a>
+          </div>
+        </div>
+
+        <div class="terminal" aria-label="Hardware engineer code card">
+          <div class="terminal-header">
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+            <span class="terminal-dot"></span>
+            <span style="margin-left: 8px;">about_me.sv</span>
+          </div>
+
+          <div class="terminal-body">
+            <div class="code-comment">// Engineer in progress</div>
+            <div><span class="code-key">module</span> engineer_profile;</div>
+            <br>
+            <div>&nbsp; <span class="code-key">string</span> focus =</div>
+            <div>&nbsp; <span class="code-value">"RTL + Verification"</span>;</div>
+            <br>
+            <div>&nbsp; <span class="code-key">string</span> tools =</div>
+            <div>&nbsp; <span class="code-value">"Verilog, SV, Vivado"</span>;</div>
+            <br>
+            <div>&nbsp; <span class="code-key">initial</span> begin</div>
+            <div>&nbsp; &nbsp; <span class="code-fn">learn</span>();</div>
+            <div>&nbsp; &nbsp; <span class="code-fn">design</span>();</div>
+            <div>&nbsp; &nbsp; <span class="code-fn">verify</span>();</div>
+            <div>&nbsp; <span class="code-key">end</span></div>
+            <div><span class="code-key">endmodule</span></div>
+
+            <div class="terminal-status">
+              ● Always learning, always building.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUICK FACTS -->
+    <section class="facts" aria-label="Profile highlights">
+      <div class="container facts-grid">
+        <div class="fact">
+          <strong>NIT Warangal</strong>
+          <span>Master's in Electronics</span>
+        </div>
+        <div class="fact">
+          <strong>RTL & Verification</strong>
+          <span>Design · Simulation · Debugging</span>
+        </div>
+        <div class="fact">
+          <strong>FPGA & ASIC</strong>
+          <span>From RTL to implementation</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="container">
+        <p class="eyebrow">What I've been building</p>
+        <h2 class="section-title">Selected <span class="accent">projects.</span></h2>
+        <p class="section-description">
+          A collection of digital hardware designs, verification exercises
+          and implementation projects. Open the repositories to explore
+          the source code and technical details.
+        </p>
+
+        <div class="projects-grid">
+
+          <article class="project-card">
+            <div class="project-top">
+              <div class="project-icon">⌘</div>
+              <span class="project-type">PROCESSOR DESIGN</span>
+            </div>
+            <h3>RV32I Single-Cycle RISC-V Processor</h3>
+            <p>
+              Designed a 32-bit processor microarchitecture in Verilog,
+              including the datapath, control unit, ALU, register file,
+              immediate generator and program counter. Simulated and
+              implemented the design on a Xilinx FPGA.
+            </p>
+            <div class="tags">
+              <span class="tag">Verilog</span>
+              <span class="tag">RV32I</span>
+              <span class="tag">Vivado</span>
+              <span class="tag">Timing Analysis</span>
+            </div>
+            <a class="project-link"
+               href="https://github.com/krishnendumetia?tab=repositories">
+              Explore repositories ↗
+            </a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <div class="project-icon">⇄</div>
+              <span class="project-type">RTL VERIFICATION</span>
+            </div>
+            <h3>Asynchronous FIFO</h3>
+            <p>
+              A design and verification project focused on independent
+              read/write clock domains, Gray-coded pointers, synchronizers,
+              FIFO boundary conditions and reliable data ordering.
+            </p>
+            <div class="tags">
+              <span class="tag">SystemVerilog</span>
+              <span class="tag">CDC</span>
+              <span class="tag">Assertions</span>
+              <span class="tag">Scoreboard</span>
+            </div>
+            <a class="project-link"
+               href="https://github.com/krishnendumetia?tab=repositories">
+              Explore repositories ↗
+            </a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <div class="project-icon">▦</div>
+              <span class="project-type">ASIC DESIGN</span>
+            </div>
+            <h3>4×4 Systolic Array Multiplier</h3>
+            <p>
+              Explored parallel matrix multiplication hardware using
+              sixteen 8-bit multiply-accumulate processing elements,
+              with an RTL-to-ASIC implementation flow using OpenLane
+              and the SkyWater 130 nm platform.
+            </p>
+            <div class="tags">
+              <span class="tag">Verilog</span>
+              <span class="tag">MAC Units</span>
+              <span class="tag">OpenLane</span>
+              <span class="tag">Sky130</span>
+            </div>
+            <a class="project-link"
+               href="https://github.com/krishnendumetia?tab=repositories">
+              Explore repositories ↗
+            </a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <div class="project-icon">∑</div>
+              <span class="project-type">DIGITAL SIGNAL PROCESSING</span>
+            </div>
+            <h3>FIR Moving-Average Filter</h3>
+            <p>
+              Implemented an 8-tap moving-average FIR filter in RTL
+              and explored its response to high-frequency noise
+              through simulation.
+            </p>
+            <div class="tags">
+              <span class="tag">Verilog</span>
+              <span class="tag">DSP</span>
+              <span class="tag">FIR</span>
+              <span class="tag">Simulation</span>
+            </div>
+            <a class="project-link"
+               href="https://github.com/krishnendumetia?tab=repositories">
+              Explore repositories ↗
+            </a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <div class="project-icon">#</div>
+              <span class="project-type">CRYPTOGRAPHIC HARDWARE</span>
+            </div>
+            <h3>SHA-256 Hardware Core</h3>
+            <p>
+              An RTL implementation project exploring SHA-256 message
+              scheduling, compression rounds, fixed-width arithmetic
+              and the control logic needed for iterative hashing.
+            </p>
+            <div class="tags">
+              <span class="tag">Verilog</span>
+              <span class="tag">SHA-256</span>
+              <span class="tag">Bitwise Logic</span>
+            </div>
+            <a class="project-link"
+               href="https://github.com/krishnendumetia?tab=repositories">
+              Explore repositories ↗
+            </a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-top">
+              <div class="project-icon">AI</div>
+              <span class="project-type">HARDWARE ACCELERATION</span>
+            </div>
+            <h3>Fixed-Point Softmax in Verilog</h3>
+            <p>
+              Implemented a neural-network softmax activation function
+              using Q8.8 fixed-point arithmetic, base-2 exponentiation
+              and Taylor-series approximation, with testbench-based
+              validation against a software implementation.
+            </p>
+            <div class="tags">
+              <span class="tag">Verilog</span>
+              <span class="tag">Q8.8</span>
+              <span class="tag">Fixed-Point</span>
+              <span class="tag">Verification</span>
+            </div>
+            <a class="project-link"
+               href="https://github.com/krishnendumetia?tab=repositories">
+              Explore repositories ↗
+            </a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section skills-section" id="skills">
+      <div class="container">
+        <p class="eyebrow">My technical toolkit</p>
+        <h2 class="section-title">Skills & <span class="accent">interests.</span></h2>
+        <p class="section-description">
+          The languages, tools and concepts I use while learning
+          digital design and hardware implementation.
+        </p>
+
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3>01 / RTL Design</h3>
+            <p>
+              Verilog, SystemVerilog, combinational and sequential
+              logic, FSMs, FIFOs, datapaths and parameterized modules.
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <h3>02 / Verification</h3>
+            <p>
+              Testbenches, self-checking tests, assertions, scoreboards,
+              waveform debugging and functional corner cases.
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <h3>03 / FPGA</h3>
+            <p>
+              Xilinx Vivado, synthesis, implementation, timing
+              constraints, resource utilization and FPGA prototyping.
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <h3>04 / ASIC Flow</h3>
+            <p>
+              Yosys, OpenLane, SkyWater 130 nm, logic synthesis
+              and physical-design flow exploration.
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <h3>05 / Digital Systems</h3>
+            <p>
+              Computer architecture, RV32I, CDC fundamentals,
+              digital signal processing and hardware interfaces.
+            </p>
+          </div>
+
+          <div class="skill-card">
+            <h3>06 / Tools & Languages</h3>
+            <p>
+              Git, GitHub, Linux, C fundamentals and simulation
+              tools for hardware design and debugging.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience">
+      <div class="container">
+        <p class="eyebrow">Learning through research</p>
+        <h2 class="section-title">Experience & <span class="accent">education.</span></h2>
+        <p class="section-description">
+          My academic background and hands-on research experience
+          in digital hardware design.
+        </p>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="timeline-date">MAY – JUL 2026</span>
+            <h3>Summer Research Intern · IISc Bengaluru</h3>
+            <p>
+              Designed a single-cycle RV32I RISC-V processor in Verilog.
+              Developed a self-checking SystemVerilog testbench, debugged
+              simulations in Vivado, and evaluated FPGA timing, power
+              and resource utilization.
+            </p>
+          </article>
+
+          <article class="timeline-item">
+            <span class="timeline-date">MAY – JUL 2025</span>
+            <h3>Summer Research Intern · IIT Jodhpur</h3>
+            <p>
+              Worked on hardware implementation of a neural-network
+              softmax activation function using Q8.8 fixed-point
+              arithmetic, exponential approximation and simulation-based
+              validation.
+            </p>
+          </article>
+
+          <article class="timeline-item">
+            <span class="timeline-date">AUG 2024 – JUL 2027</span>
+            <h3>Master's in Electronics · NIT Warangal</h3>
+            <p>
+              Studying electronics, digital system design, hardware
+              description languages, computer organization,
+              microprocessor interfacing and high-speed data converters.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNICAL NOTES -->
+    <section class="section skills-section" id="notes">
+      <div class="container">
+        <p class="eyebrow">Learn · document · share</p>
+        <h2 class="section-title">Technical <span class="accent">notebook.</span></h2>
+        <p class="section-description">
+          A space for documenting concepts, design decisions,
+          debugging experiences and interview preparation.
+          Add links to your published articles as you write them.
+        </p>
+
+        <div class="notes-grid">
+          <a class="note-card"
+             href="https://github.com/krishnendumetia?tab=repositories">
+            <span>01 / VERIFICATION</span>
+            <h3>SystemVerilog & Assertions ↗</h3>
+            <p>Testbench architecture, assertions, scoreboards and coverage.</p>
+          </a>
+
+          <a class="note-card"
+             href="https://github.com/krishnendumetia?tab=repositories">
+            <span>02 / CDC</span>
+            <h3>Asynchronous FIFO Design ↗</h3>
+            <p>Pointer synchronization, Gray coding and full/empty detection.</p>
+          </a>
+
+          <a class="note-card"
+             href="https://github.com/krishnendumetia?tab=repositories">
+            <span>03 / COMPUTER ARCHITECTURE</span>
+            <h3>Inside a RISC-V Processor ↗</h3>
+            <p>Instruction decoding, datapaths, ALUs and control logic.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="contact-box">
+          <p class="eyebrow">Let's connect</p>
+          <h2 class="section-title">
+            Let's build something <span class="accent">real.</span>
+          </h2>
+          <p class="section-description">
+            Interested in RTL design, design verification, FPGA
+            prototyping or ASIC development? Explore my repositories
+            or connect with me professionally.
+          </p>
+
+          <div class="button-row">
+            <a class="button button-primary"
+               href="https://github.com/krishnendumetia"
+               target="_blank" rel="noopener noreferrer">
+              GitHub profile ↗
+            </a>
+
+            <!-- Replace # with your LinkedIn profile URL -->
+            <a class="button button-secondary"
+               href="#contact"
+               id="linkedinLink">
+              LinkedIn — add your URL
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Krishnendu Metia · Built with HTML & CSS.</p>
+      <a class="back-top" href="#top">Back to top ↑</a>
     </div>
+  </footer>
 
-    <h2>Contact</h2>
-    <p>
-        <a href="https://github.com/krishnendumetia">
-            My GitHub
-        </a>
-    </p>
+  <script>
+    // Mobile navigation
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    // Close the menu after selecting a section
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "☰";
+      });
+    });
+
+    // Automatically update the copyright year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
+
 </body>
 </html>
